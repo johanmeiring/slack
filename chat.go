@@ -106,6 +106,17 @@ func (api *Client) PostMessage(channel, text string, params PostMessageParameter
 	return respChannel, respTimestamp, err
 }
 
+func (api *Client) PostCommand(channel, command string, text string, params PostMessageParameters) (string, string, error) {
+	respChannel, respTimestamp, _, err := api.SendMessageContext(
+		context.Background(),
+		channel,
+		MsgOptionCommand(command, text),
+		MsgOptionAttachments(params.Attachments...),
+		MsgOptionPostMessageParameters(params),
+	)
+	return respChannel, respTimestamp, err
+}
+
 // PostMessageContext sends a message to a channel with a custom context
 // For more details, see PostMessage documentation
 func (api *Client) PostMessageContext(ctx context.Context, channel, text string, params PostMessageParameters) (string, string, error) {
