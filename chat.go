@@ -208,6 +208,7 @@ const (
 	chatDelete        sendMode = "chat.delete"
 	chatPostEphemeral sendMode = "chat.postEphemeral"
 	chatMeMessage     sendMode = "chat.meMessage"
+	chatCommand       sendMode = "chat.command"
 )
 
 type sendConfig struct {
@@ -299,6 +300,17 @@ func MsgOptionText(text string, escape bool) MsgOption {
 		if escape {
 			text = escapeMessage(text)
 		}
+		config.values.Add("text", text)
+		return nil
+	}
+}
+
+// MsgOptionCommand executes a command
+func MsgOptionCommand(command, text string) MsgOption {
+	return func(config *sendConfig) error {
+		config.mode = chatCommand
+		config.values.Del("ts")
+		config.values.Add("command", command)
 		config.values.Add("text", text)
 		return nil
 	}

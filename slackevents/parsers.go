@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/nlopes/slack"
+	"github.com/johanmeiring/slack"
 )
 
 // eventsMap checks both slack.EventsMapping and
@@ -198,7 +198,7 @@ func ParseActionEvent(payloadString string, opts ...Option) (MessageAction, erro
 	action := MessageAction{}
 	err := json.Unmarshal(byteString, &action)
 	if err != nil {
-		return MessageAction{}, errors.New( "MessageAction unmarshalling failed")
+		return MessageAction{}, errors.New("MessageAction unmarshalling failed")
 	}
 
 	cfg := &Config{}

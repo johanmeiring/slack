@@ -3,8 +3,8 @@ package slack_test
 import (
 	"testing"
 
+	"github.com/johanmeiring/slack"
 	slacktest "github.com/lusis/slack-test"
-	"github.com/nlopes/slack"
 	"github.com/stretchr/testify/assert"
 )
 
